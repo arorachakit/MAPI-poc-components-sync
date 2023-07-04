@@ -31,7 +31,7 @@ async function getChildSpaceComponents() {
 // Create Component in the Child Space
 async function createChildComponent(component, child_space) {
   // check if the component has any specific changes
-  let checked_component = await checkChange(component, child_space);
+  let checked_component = await customizeComponent(component, child_space);
 
   await Storyblok.post(`spaces/${CHILD_SPACE}/components/`, {
     component: checked_component,
@@ -44,7 +44,7 @@ async function createChildComponent(component, child_space) {
 async function updateChildComponent(component, child_space, child_component) {
   component.id = child_component.id;
   // check if the component has any specific changes
-  let checked_component = await checkChange(component, child_space);
+  let checked_component = await customizeComponent(component, child_space);
   console.log(component.schema);
 
   // Don't update if the schema is same
@@ -70,8 +70,8 @@ async function updateChildComponent(component, child_space, child_component) {
 }
 
 // Check and Apply a Sepcific Change for Child Space
-async function checkChange(component, child_space) {
-  // Updates and changes space specific
+async function customizeComponent(component, child_space) {
+  // Updates and changes to a component - space specific
 
   //   Example: Inside the child space, change the schema of component named 'test-component'
   //    Make, change the field named 'options' to use c.json instead of p.json
